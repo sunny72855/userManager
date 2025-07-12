@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="name">ojuehqwheiuqw</h1>
+    <button id="changeName" >Change Name</button>
+    <button id="lower">Turn lower</button>
+    <button id="upper">Turn upper</button>
+</body>
+<script>
+    let name = document.getElementById("name");
+    console.log(name.innerHTML);
+    name.innerHTML = "Hello, World!";
+    console.log(name.innerHTML);
+    name.style.color = "blue";
+    name.style.fontSize = "50px";
+    function onPress() {
+        name.innerHTML = "Hello, JavaScript!";
+        name.style.color = "red";
+        name.style.fontSize = "30px";
+    }
+    let changeNameButton = document.getElementById("changeName");
+    changeNameButton.addEventListener("click", onPress);
+
+    function turnLower() {
+        name.innerHTML = name.innerHTML.toLowerCase();
+    }
+
+    function turnUpper() {
+        name.innerHTML = name.innerHTML.toUpperCase();
+    }
+
+    document.getElementById("lower").addEventListener("click", turnLower);
+    document.getElementById("upper").addEventListener("click", turnUpper);
+</script>
+</html>

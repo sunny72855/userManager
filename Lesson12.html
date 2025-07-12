@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="passwordInput" placeholder="Enter your password">
+    <img src="https://cdn-icons-png.flaticon.com/128/2767/2767146.png" alt="eye icon" width="20px" height="20px">
+    <button id="login">Log in</button>
+</body>
+
+<!-- <script>
+    let passwordInput = document.getElementById("passwordInput");
+    let image = document.querySelector("img");
+    let isPasswordVisible = false; 
+    image.addEventListener("click", function() {
+        if (isPasswordVisible) {
+            passwordInput.type = "password"; // Hide the password
+            image.src = "https://cdn-icons-png.flaticon.com/128/2767/2767146.png"; // Change image to eye closed
+        } else {
+            passwordInput.type = "text"; // Show the password
+            image.src = "https://cdn-icons-png.flaticon.com/128/709/709612.png"; // Change image to eye open
+        }
+        isPasswordVisible = !isPasswordVisible; // Toggle visibility state
+    });
+
+    let n = 0;
+    if (n > 0) {
+        console.log("n lon hon 0");
+    } else {
+        console.log("n nho hon hoac bang 0");
+    }
+</script> -->
+
+<script>
+    let passwordInput = document.getElementById("passwordInput");
+    console.log(passwordInput);
+    function checkPassword() {
+        console.log(passwordInput.value);
+        if (passwordInput.value.length > 5 && passwordInput.value.length < 50) {
+            if (passwordInput.value.includes(" ")) {
+                alert("Password cannot contain spaces");
+                return;
+            }
+            alert("Password is valid");
+        } else {
+            alert("Password must be between 5 and 20 characters long");
+        }
+    }
+    document.getElementById("login").addEventListener("click", checkPassword);
+
+    let n = 1;
+    switch (n) {
+        case 0:
+            console.log("n is zero");
+            break;
+        case parseInt("1"):
+            n++;
+            console.log("n is one");
+            break;
+        case 2:
+            console.log("n is two");
+            break;
+        default:
+            console.log("n is something else");
+            break;
+    }
+
+    (n >= 8) ? console.log("hsg") :
+        (n >= 5) ? console.log("tb") : console.log("yeu");
+
+    let numbers = [5, 6, 1, 2, 80, 2, 9, 43, 567, 2,1,4, 421, 21, 54, 103, 9201.3231];
+    let max = numbers[0];
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] > max) {
+            max = numbers[i];
+        }
+    }
+    console.log("Max number is: " + max);    
+</script>
+
+</html>

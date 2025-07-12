@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân loại học sinh</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        ul {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        li {
+            list-style: none;
+            padding: 8px 0;
+            font-size: 1.05em;
+            color: #444;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        li:nth-child(1) {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        li:nth-child(2) {
+            color: #17a2b8;
+            font-weight: 600;
+        }
+
+        li:nth-child(3) {
+            color: #ffc107;
+            font-weight: 600;
+        }
+
+        li:nth-child(4) {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        #score {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        #score:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        #check {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #check:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        #check:active {
+            transform: translateY(0);
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: 600;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .result-excellent {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .result-good {
+            background: linear-gradient(135deg, #17a2b8, #20c997);
+            color: white;
+        }
+
+        .result-average {
+            background: linear-gradient(135deg, #ffc107, #fd7e14);
+            color: white;
+        }
+
+        .result-poor {
+            background: linear-gradient(135deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Phân loại học sinh</h1>
+        <p class="description">Hệ thống phân loại học sinh theo điểm số:</p>
+        <ul>
+            <li>Giỏi: >= 8.0</li>
+            <li>Khá: 8.0 > ... >= 5.0</li>
+            <li>Trung bình: 5.0 > ... >= 3.0</li>
+            <li>Yếu: 3.0 > ... >= 0.0</li>
+        </ul>
+
+        <div class="input-section">
+            <label class="input-label" for="score">Nhập điểm của học sinh:</label>
+            <input type="number" id="score" placeholder="Nhập điểm từ 0 đến 10" min="0" max="10" step="0.1">
+            <button id="check">Kiểm tra kết quả</button>
+        </div>
+
+        <div id="result"></div>
+
+        <select name="bg-color" id="bg-color">
+            <option value="default">Default</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+        <button id="change-bg">Save changes</button>
+    </div>
+
+    <script>
+        let score = document.getElementById('score');
+        let checkButton = document.getElementById('check');
+        let result = document.getElementById('result');
+        let bgColorSelect = document.getElementById('bg-color');
+        let changeBgButton = document.getElementById('change-bg');
+
+        function classifyStudent(score) {
+            if (score > 10.0 || score < 0.0) {
+                return "Điểm không hợp lệ";
+            }
+            if (score >= 8.0) {
+                return "Giỏi";
+            }
+            if (score >= 5.0) {
+                return "Khá";
+            }
+            if (score >= 3.0) {
+                return "Trung bình";
+            }
+            return "Yếu";
+        }
+        checkButton.addEventListener('click', () => {
+            let grade = classifyStudent(parseFloat(score.value));
+            switch (grade) {
+                case "Giỏi":
+                    result.textContent = `Giỏi (${score.value})`;
+                    result.className = "result-excellent";
+                    break;
+                case "Khá":
+                    result.textContent = `Khá (${score.value})`;
+                    result.className = "result-good";
+                    break;
+                case "Trung bình":
+                    result.textContent = `Trung bình (${score.value})`;
+                    result.className = "result-average";
+                    break;
+                case "Yếu":
+                    result.textContent = `Yếu (${score.value})`;
+                    result.className = "result-poor";
+                    break;
+                default:
+                    result.textContent = "Điểm không hợp lệ";
+                    result.className = "result-poor";
+                    break;
+            }
+        })
+
+        changeBgButton.addEventListener('click', () => {
+            let selectedColor = bgColorSelect.value;
+            console.log(selectedColor);
+            switch (selectedColor) {
+                case "light":
+                    document.body.style.background = "#f8f9fa";
+                    document.body.style.color = "#333";
+                    break;
+                case "dark":
+                    document.body.style.background = "#343a40";
+                    document.body.style.color = "#f8f9fa";
+                    break;
+                default:
+                    document.body.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+                    document.body.style.color = "#333";
+                    break;
+            }
+        });
+    </script>
+</body>
+
+</html>

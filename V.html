@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Việt Võ Đạo Memorization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .line {
+            display: none;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        textarea {
+            width: 80%;
+            height: 60px;
+            font-size: 16px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Luyện Tập Việt Võ Đạo</h1>
+    
+    <h2>Hiển Thị Câu</h2>
+    <button onclick="toggleLines()">Hiển Thị/Ẩn Toàn Bộ Câu</button>
+    <div id="linesContainer"></div>
+    
+    <h2>Trò Chơi Ghi Nhớ</h2>
+    <p id="gameLine"><strong>Hãy viết lại câu:</strong> <span id="randomSentence"></span></p>
+    <textarea id="userInput" placeholder="Viết lại câu..."></textarea>
+    <br>
+    <button onclick="checkAnswer()">Kiểm Tra</button>
+    <p id="feedback"></p>
+
+    <script>
+        const lines = [
+            "Việt Võ Đạo sinh nguyện đạt tới cao độ của nghệ thuật để phục vụ dân tộc và nhân loại",
+            "Việt Võ Đạo sinh nguyện trung kiên phát huy môn phái, xây dựng thế hệ thanh niên dấn thân hiến ích",
+            "Việt Võ Đạo sinh đồng tâm nhất chí, tôn kính người trên, thương mến đồng đạo",
+            "Việt Võ Đạo sinh tuyệt đối tôn trọng kỷ luật, nêu cao danh dự võ sĩ.",
+            "Việt Võ Đạo sinh tôn trọng các võ phái khác, chỉ dụng võ để tự vệ và bênh vực lẽ phải",
+            "Việt Võ Đạo sinh chuyên cần học tập, rèn luyện tinh thần, trau dồi đạo hạnh.",
+            "Việt Võ Đạo sinh sống trong sạch, giản dị, trung thực, và cao thượng.",
+            "Việt Võ Đạo Sinh kiện toàn một ý chí đanh thép, nỗ lực tự thân cầu tiến.",
+            "Việt Võ Đạo sinh sáng suốt nhận định, bền gan tranh đấu, tháo vát hành động.",
+            "Việt Võ Đạo sinh tự tin, tự thắng, khiêm cung, độ lượng, luôn luôn kiểm điểm để tiến bộ."
+        ];
+        
+        let linesVisible = false;
+        let currentIndex = -1;
+        
+        function toggleLines() {
+            const container = document.getElementById("linesContainer");
+            if (linesVisible) {
+                container.innerHTML = "";
+            } else {
+                container.innerHTML = lines.map((line, index) => `<p class='line'><strong>Câu ${index + 1}:</strong> ${line}</p>`).join("");
+                document.querySelectorAll(".line").forEach(line => line.style.display = "block");
+            }
+            linesVisible = !linesVisible;
+        }
+
+        function startGame() {
+            currentIndex = Math.floor(Math.random() * lines.length);
+            document.getElementById("randomSentence").innerText = `Câu ${currentIndex + 1}`;
+            document.getElementById("userInput").value = "";
+            document.getElementById("feedback").innerText = "";
+        }
+
+        function checkAnswer() {
+            let userAnswer = document.getElementById("userInput").value.trim().toLowerCase();
+            let correctAnswer = lines[currentIndex].toLowerCase();
+            if (userAnswer === correctAnswer) {
+                document.getElementById("feedback").innerText = "Chính xác!";
+                document.getElementById("feedback").className = "correct";
+                setTimeout(startGame, 1000);
+            } else {
+                document.getElementById("feedback").innerText = `Sai! Đáp án đúng là: Câu ${currentIndex + 1}: ${lines[currentIndex]}`;
+                document.getElementById("feedback").className = "incorrect";
+            }
+        }
+    </script>
+    <br>
+    <button onclick="startGame()">Bắt Đầu Trò Chơi</button>
+</body>
+</html>
